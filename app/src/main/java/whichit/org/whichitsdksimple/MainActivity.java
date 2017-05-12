@@ -4,20 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.provider.Settings.Secure;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,51 +18,36 @@ public class MainActivity extends AppCompatActivity {
     private WebView mainWebView;
     private TextView txtData;
 
-    // Javascript object interface.
-    // This class contain all the callback called by the javascript code.
-    class JsObject {
-        @JavascriptInterface
-        public void show(String msg) { Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show(); }
-
-        @JavascriptInterface
-        //Return a unique ID for user
-        public String getAndroidID() { return Secure.getString(getApplicationContext().getContentResolver(),
-                Secure.ANDROID_ID);}
-
-        @JavascriptInterface
-        public void reportData(String json) {
-            try {
-                JSONObject jsonObj = new JSONObject(json);
-                JSONObject jsonObject = jsonObj.getJSONObject("whichitEventObject");
-                String s = "";
-                Iterator<String> keys = jsonObject.keys();
-                while (keys.hasNext()){
-                    String field = keys.next();
-                    if (!jsonObject.has(field))
-                        continue;
-                    s += field + ": " + jsonObject.getString(field) + "\n";
-                }
-                txtData.setText(s);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //TextView
+        txtData = (TextView) findViewById(R.id.txtData);
         //WebView
         mainWebView = (WebView) findViewById(R.id.mainView);
         mainWebView.setWebContentsDebuggingEnabled(true);
         mainWebView.setWebChromeClient(new WebChromeClient());
         mainWebView.getSettings().setJavaScriptEnabled(true);
         mainWebView.loadUrl("file:///android_asset/whchit_sdk_wrapper.html");
-        mainWebView.addJavascriptInterface(new JsObject(), "javaObj");
-        //TextView
-        txtData = (TextView) findViewById(R.id.txtData);
-
+        mainWebView.addJavascriptInterface(new JsObject(getApplicationContext(), new EventsCallback() {
+            @Override
+            public void onEvent(JSONObject json, EVENTS event) {
+                String s = event.toString() + "\n";
+                Iterator<String> keys = json.keys();
+                while (keys.hasNext()){
+                    String field = keys.next();
+                    if (!json.has(field))
+                        continue;
+                    try {
+                        s += field + ": " + json.getString(field) + "\n";
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                txtData.setText(s);
+            }
+        }), "javaObj");
     }
 
     @Override
