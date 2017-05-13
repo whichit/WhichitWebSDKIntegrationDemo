@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	
+    @Content@
+
+	<!--Whichit SDK Start-->
+	<script type="text/javascript">
+        
+        window.whichitAdvertisingID = "@UserUniqueID@";
+        
+		// create link object from referrer, read url and origin
+		if (document && document.referrer && document.referrer.length > 0) {
+			var linkObject = document.createElement('a');
+			linkObject.href = document.referrer;
+			if (linkObject.origin) {
+				window.DocOrigin = linkObject.origin;
+			} else {
+				window.DocOrigin = linkObject.protocol + "//" + linkObject.hostname + (linkObject.port ? ':' + linkObject.port : '');
+			}
+		} else {
+			window.DocOrigin = "*";
+		}
+    
+    
+		//	Every listener will return an event object containing the name of the action, the associated id and additional info depending on the action type.
+		//	The data passed from the functions can be used in for any javascript function on your site, eg: analytics tracking, funnel building etc...
+		//	The event returned from the Whichit SDK can be accessed using the internal 'event' variable.
+		window.whichitAsyncInit = function() {
+			//	this function will be called when the Whichit embed is ready for events,
+			//	a list of available events is below.
+
+			window.whichit.addListener('whichitView', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));
+			});
+			window.whichit.addListener('whichitVote', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                                       
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));
+			});
+			window.whichit.addListener('whichitShare', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                                       
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));
+			});
+			window.whichit.addListener('whichitCTAClick', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                                       
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));
+			});
+			window.whichit.addListener('whichitCollectionStarted', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));
+			});
+			window.whichit.addListener('whichitCollectionFinished', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));
+			});
+			window.whichit.addListener('whichitEngageCardView', function(e) {
+				window.parent.postMessage(JSON.stringify({
+					whichitEventObject: e
+				}), window.DocOrigin);
+                                       
+                window.webkit.messageHandlers.jsObj.postMessage(JSON.stringify({ whichitEventObject: e }));;
+			});
+            
+		};
+
+	</script>
+	<!-- Whichit SDK End -->
+</body>
+
+</html>
