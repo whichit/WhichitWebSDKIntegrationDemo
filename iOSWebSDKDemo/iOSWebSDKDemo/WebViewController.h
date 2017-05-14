@@ -11,7 +11,8 @@
 
 @interface WebViewController : UIViewController <WKScriptMessageHandler> {
     NSMutableDictionary *result;
-    UILabel *lblResult;
+//    UILabel *lblResult;
+    UITextView *resultTextView;
 }
 
 @property (strong, nonatomic) WKWebView *webView;

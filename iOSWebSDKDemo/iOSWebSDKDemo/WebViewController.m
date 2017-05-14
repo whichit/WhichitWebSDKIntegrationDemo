@@ -19,16 +19,6 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
 
 @implementation WebViewController
 
-//NSArray *whViewKeys = [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", nil];
-
-//"fromSite"
-//vessel: "",
-//userID: "",
-//whichitid: "",
-//collectionid: "",
-//campaignid: "",
-//placementid: """, @"", @""};
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -45,13 +35,13 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
 - (NSArray *) getJSObjectFieldsForEvent: (NSString *) eventName{
     
     NSDictionary *serverObjectFieldMapping = @{
-                                               @"whichitView" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", nil],
-                                               @"whichitVote" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"frameIndex", @"frameID", nil],
-                                               @"whichitShare" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"network", nil],
-                                               @"whichitCTAClick" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"ctaLink", @"engageCardID", @"engageCardType", nil],
-                                               @"whichitCollectionStarted" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"collectionid", @"campaignid", @"placementid", nil],
-                                               @"whichitCollectionFinished" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"collectionid", @"campaignid", @"placementid", nil],
-                                               @"whichitEngageCardView" : [NSArray arrayWithObjects:@"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"engageCardID", @"engageCardType", nil]
+                                               @"whichitView" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", nil],
+                                               @"whichitVote" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"frameIndex", @"frameID", nil],
+                                               @"whichitShare" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"network", nil],
+                                               @"whichitCTAClick" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"ctaLink", @"engageCardID", @"engageCardType", nil],
+                                               @"whichitCollectionStarted" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"collectionid", @"campaignid", @"placementid", nil],
+                                               @"whichitCollectionFinished" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"collectionid", @"campaignid", @"placementid", nil],
+                                               @"whichitEngageCardView" : [NSArray arrayWithObjects:@"name", @"fromSite", @"vessel", @"userID", @"whichitid", @"collectionid", @"campaignid", @"placementid", @"engageCardID", @"engageCardType", nil]
                                               };
     
     return [serverObjectFieldMapping valueForKey:eventName];
@@ -86,7 +76,11 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
     
     [self.view addSubview:self.webView];
     
-    lblResult = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 200, self.view.bounds.size.width, 200)];
+    //Result object view
+    resultTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 200, self.view.frame.size.width, 150)];
+    resultTextView.editable = NO;
+    resultTextView.scrollEnabled = YES;
+    resultTextView.userInteractionEnabled = YES;
     
 }
 
@@ -103,25 +97,23 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
     NSArray *fieldsForEvents = [self getJSObjectFieldsForEvent:[eventObjectData valueForKey:@"name"]];
     
     result = [[NSMutableDictionary alloc] init];
-    [result setValue:[eventObjectData valueForKey:@"name"] forKey:@"name"];
     
     for(NSString *field in fieldsForEvents){
         [result setValue:[eventObjectData valueForKey:field] forKey:field];
     }
     
-    NSLog(@"Result: %@, Keys: %@", result, [result allKeys]);
-    
-    lblResult.text = @"";
-    lblResult.numberOfLines = 0;
-    lblResult.textColor = [UIColor grayColor];
-    lblResult.text = @"Result:\n";
+    NSString *resultString = @"";
+    resultString = @"Result:\n";
     
     for (NSString *key in [result allKeys]){
         NSString *resText = [NSString stringWithFormat:@"%@:%@\n", key, [result valueForKey:key]];
-        lblResult.text = [lblResult.text stringByAppendingString:resText];
+        resultString = [resultString stringByAppendingString:resText];
     }
     
-    [self.webView addSubview:lblResult];
+    [resultTextView setText:resultString];
+    
+    [self.webView addSubview:resultTextView];
+    
 }
 
 
