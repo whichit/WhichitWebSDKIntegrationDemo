@@ -22,18 +22,18 @@ In order to display the Whichit entity on the screen,
 * Implement the `ContentViewController` delegate called `ContentViewDelegate` in the `UIViewController`.
 * Implement `ContentViewDelegate's` `-(void)contentViewDataResponse:(NSDictionary *)resultObject;` method. The `resultObject` is a `NSDictionary` which contains the following fields:
 
-   `name`: Name of the event returned.
-   `fromSite`: IFrame listener - will always be "whichit"
-   `vessel`: The whichitSDK.
-   `userID`: The user's ID
-   `placementid`: The placement's ID
-   `campaignid`: The campaign's ID
-   `collectionid`: The collection's(survey/quiz) ID
-   `whichitid`: The whichit posts's ID
-   `frameIndex`: The zero-based index of the whichit's frames
-   `frameID`: The whichit post's frame's ID
-   `engageCardID`: The engage card's ID
-   `engageCardType`: The Type of engage card
+   `name`: Name of the event returned.  
+   `fromSite`: IFrame listener - will always be "whichit"  
+   `vessel`: The whichitSDK.  
+   `userID`: The user's ID  
+   `placementid`: The placement's ID  
+   `campaignid`: The campaign's ID  
+   `collectionid`: The collection's(survey/quiz) ID  
+   `whichitid`: The whichit posts's ID  
+   `frameIndex`: The zero-based index of the whichit's frames  
+   `frameID`: The whichit post's frame's ID  
+   `engageCardID`: The engage card's ID  
+   `engageCardType`: The Type of engage card  
    `ctaLink`: The hyperlink on the 'CTA' button of an engage card
 
 * Initialise an instance of `ContentViewController`, set the current controller as it's delegate, and invoke it's `- (void) loadInteractiveHTMLWithContent: (NSString *)contentName;` method where, the parameter (`contentName`) is the name of the `Content (definition above)` file.
@@ -55,10 +55,10 @@ Handle events
 --------------------
 
 Following are the events reported:
-* whichitView: Reported once the `Whichit` object is loaded and rendered.
-* whichitVote: Reported once the user votes on the `Whichit`.
-* whichitShare: Reported when the user clicks on the Facebook or Twitter share after voting.
-* whichitCTAClick: Reported when the user cliks on the `CTA button` to either Redirect or collect emails.
-* whichitCollectionStarted: If a `Whichit` is placed inside a `Collection (i.e a survey or a quiz)`, the vote on the first `Whichit` of this `Collection` reports `whichitCollectionStarted`.
-* whichitCollectionFinished: If a `Whichit` is placed inside a `Collection (i.e a survey or a quiz)`, the vote on the last `Whichit` of this `Collection` reports `whichitCollectionFinished`.
-* whichitEngageCardView: Reported when the `Engage Card` is shown - normally after a `whichitVote` or `whichitCollectionFinished`.
+* `whichitView`: Reported once the `Whichit` object is loaded and rendered.
+* `whichitVote`: Reported once the user votes on the `Whichit`.
+* `whichitShare`: Reported when the user clicks on the Facebook or Twitter share after voting.
+* `whichitCTAClick`: Reported when the user cliks on the `CTA button` to either Redirect or collect emails.
+* `whichitCollectionStarted`: If a `Whichit` is placed inside a `Collection (i.e a survey or a quiz)`, the vote on the first `Whichit` of this `Collection` reports `whichitCollectionStarted`.
+* `whichitCollectionFinished`: If a `Whichit` is placed inside a `Collection (i.e a survey or a quiz)`, the vote on the last `Whichit` of this `Collection` reports `whichitCollectionFinished`.
+* `whichitEngageCardView`: Reported when the `Engage Card` is shown - normally after a `whichitVote` or `whichitCollectionFinished`.
