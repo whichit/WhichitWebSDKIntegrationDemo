@@ -3,8 +3,10 @@
 Load Whichit template
 ----------------------
 
-In order to display a Whichit on the screen it is necessary to load an HTML5 template on the Activity.
-To do so in the example code has been added in the MainActivity a WebView (mainWebView) and it is initialized in order to load the template file whchit_sdk_wrapper.html and enable the JavaScript code to run. 
+In order to display a Whichit on the screen it is necessary to load an HTML5
+template on the Activity. To do so in the example code has been added in the
+MainActivity a WebView (mainWebView) and it is initialized in order to load the
+template file whchit_sdk_wrapper.html and enable the JavaScript code to run. 
 
     public class MainActivity extends AppCompatActivity {
         ...
@@ -23,24 +25,26 @@ To do so in the example code has been added in the MainActivity a WebView (mainW
 Load Whichit data
 -----------------
 
-In order to display the correct data it is necessary to implement the member function **getBlockquote** in the class **JsObject**. 
-This class represent the interface used by the JavaScript code to interact with the Java code. The function *getBlockquote* return then a blockquote HTMl tag which will be integrated inside the displayed page, this element represent the actual Whichit/Campain displayed to the user. To display the right Whichit post it is then necessary copy-paste the right blockquote in the constant string blockquote.
+In order to display the correct Whichit post it is necessary to pass to the
+**JsObject** class a valid HTML file containing a single line with a valid
+blockquote tag which contain the information to show to the user. The filename
+represent the third parameter of the **JsObject** constructor.
+_Please note: The HTML file has to be located in the assets folder_.
 
-    public class JsObject {
-    ...
-        private static final String blockquote = **BLOCKQUOTE TAG**
-    ...
-        @JavascriptInterface
-        public String getBlockquote(){
-            return blockquote;
-        };
-    ...
     
 Handle events
 --------------------
 
-In order to finalize the initializzation of the HTML template and handle the relative events it a reference to an **JsObject** object is passed to the JavaScript environment, this is done by the function **addJavascriptInterface**.
-In order to initialize a **JsObject** it is necessary to pass a valid context and an instance of **EventsCallback** which contain a member function **onEvent** called by the JsObject when an event is catched by the underling JavaScript code. The HTML5 template send then on each event a JSON object representing the event and the relative event catched, from this method is the possible to manage all the events. In the example once the event is cateched the relative JSON is parsed and all the data are displayed on a TextBox. 
+In order to finalize the initializzation of the HTML template and handle the
+relative events it a reference to an **JsObject** object is passed to the
+JavaScript environment, this is done by the function **addJavascriptInterface**.
+In order to initialize a **JsObject** it is necessary to pass a valid context
+and an instance of **EventsCallback** which contain a member function
+**onEvent** called by the JsObject when an event is catched by the underling
+JavaScript code. The HTML5 template send then on each event a JSON object
+representing the event and the relative event catched, from this method is the
+possible to manage all the events. In the example once the event is cateched the
+relative JSON is parsed and all the data are displayed on a TextBox. 
 
     public class MainActivity extends AppCompatActivity {
     ...
@@ -61,5 +65,5 @@ In order to initialize a **JsObject** it is necessary to pass a valid context an
                         }
                         txtData.setText(s);
                     }
-                }), "javaObj");
+                }, **BLOCKQUOTE FILE**), "javaObj");
     ...

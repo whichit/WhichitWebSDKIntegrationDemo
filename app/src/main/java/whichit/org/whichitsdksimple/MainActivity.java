@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 txtData.setText(s);
             }
-        }), "javaObj");
+        }, "blockquote.html"), "javaObj");
     }
 
     @Override
