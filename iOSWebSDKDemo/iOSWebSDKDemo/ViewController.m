@@ -21,8 +21,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.navigationController.navigationBar.topItem.title = @"iOS WebSDK Demo";
-    
-    contentViewController = [[WebViewController alloc] init];
 }
 
 
@@ -44,25 +42,41 @@
 
 
 - (IBAction)viewContent1:(id)sender {
-    [self presentContentView:@"Content 1"];
+    [self presentContentView:@"Content_1"];
 }
 
 - (IBAction)viewContent2:(id)sender {
-    [self presentContentView:@"Content 2"];
+    [self presentContentView:@"Content_2"];
 }
 
 - (IBAction)viewContent3:(id)sender {
-    [self presentContentView:@"Content 3"];
+    [self presentContentView:@"Content_3"];
 }
 
 
 - (void) presentContentView:(NSString *)contentName {
 
-    contentViewController.titleString = contentName;
+    contentViewController = [[ContentViewController alloc] init];
+    contentViewController.delegate = self;
+    
+    [contentViewController loadInteractiveHTMLWithContent:contentName];
     
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController pushViewController:contentViewController animated:YES];
     
+}
+
+-(void)contentViewDataResponse:(NSDictionary *)resultObject {
+    
+    NSString *resultString = @"";
+    resultString = @"Result:\n";
+    
+    for(NSString *key in [resultObject allKeys]) {
+        NSString *resText = [NSString stringWithFormat:@"%@: %@\n", key, [resultObject valueForKey:key]];
+        resultString = [resultString stringByAppendingString:resText];
+    }
+    
+    NSLog(@"%@", resultString);
 }
 
 @end

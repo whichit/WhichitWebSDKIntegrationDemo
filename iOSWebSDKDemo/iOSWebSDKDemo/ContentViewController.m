@@ -1,15 +1,15 @@
 //
-//  WebViewController.m
+//  ContentViewController.m
 //  iOSWebSDKDemo
 //
 //  Created by Aashay Shah on 13/05/2017.
 //  Copyright © 2017 Aashay Shah. All rights reserved.
 //
 
-#import "WebViewController.h"
+#import "ContentViewController.h"
 #import <AdSupport/AdSupport.h>
 
-@interface WebViewController ()
+@interface ContentViewController ()
 
 @end
 
@@ -17,13 +17,11 @@ NSString * const USER_UNIQUE_ID = @"@UserUniqueID@";
 NSString * const CONTENT_EMBED_CODE = @"@Content@";
 
 
-@implementation WebViewController
+@implementation ContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self loadInteractiveHTML];
     
 }
 
@@ -52,14 +50,14 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
-- (void) loadInteractiveHTML {
+- (void) loadInteractiveHTMLWithContent: (NSString *)contentName {
     
     //read idfa
     NSString *idfaString = [self getUserIDFA];
     
     //html path
-    NSString *wrapperPath = [[NSBundle mainBundle] pathForResource:@"wh_sdk" ofType:@"html"];
-    NSString *contentPath = [[NSBundle mainBundle] pathForResource:@"Content_1" ofType:@"html"];
+    NSString *wrapperPath = [[NSBundle mainBundle] pathForResource:@"whichit_sdk_wrapper" ofType:@"html"];
+    NSString *contentPath = [[NSBundle mainBundle] pathForResource:contentName ofType:@"html"];
     
     //build wrapper
     NSMutableString *rawHTML = [NSMutableString stringWithContentsOfFile:wrapperPath encoding:NSUTF8StringEncoding error:NULL];
@@ -67,20 +65,14 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
     NSString *contentHTML = [NSMutableString stringWithContentsOfFile:contentPath encoding:NSUTF8StringEncoding error:NULL];
     NSString *pageHTML = [htmlTemplate stringByReplacingOccurrencesOfString:CONTENT_EMBED_CODE withString:contentHTML];
     
-    WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
-    [theConfiguration.userContentController addScriptMessageHandler:self name:@"jsObj"];
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    [configuration.userContentController addScriptMessageHandler:self name:@"jsObj"];
     
-    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:theConfiguration];
-    
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:configuration];
+    self.webView.UIDelegate = self;
     [self.webView loadHTMLString:pageHTML baseURL:nil];
     
     [self.view addSubview:self.webView];
-    
-    //Result object view
-    resultTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 200, self.view.frame.size.width, 150)];
-    resultTextView.editable = NO;
-    resultTextView.scrollEnabled = YES;
-    resultTextView.userInteractionEnabled = YES;
     
 }
 
@@ -93,30 +85,21 @@ NSString * const CONTENT_EMBED_CODE = @"@Content@";
                                                                        options:NSJSONReadingMutableContainers
                                                                          error:&jsonError];
     
-    NSDictionary *eventObjectData = jsonDataDictionary[@"whichitEventObject"];
-    NSArray *fieldsForEvents = [self getJSObjectFieldsForEvent:[eventObjectData valueForKey:@"name"]];
-    
-    result = [[NSMutableDictionary alloc] init];
-    
-    for(NSString *field in fieldsForEvents){
-        [result setValue:[eventObjectData valueForKey:field] forKey:field];
-    }
-    
-    NSString *resultString = @"";
-    resultString = @"Result:\n";
-    
-    for (NSString *key in [result allKeys]){
-        NSString *resText = [NSString stringWithFormat:@"%@:%@\n", key, [result valueForKey:key]];
-        resultString = [resultString stringByAppendingString:resText];
-    }
-    
-    [resultTextView setText:resultString];
-    
-    [self.webView addSubview:resultTextView];
+    [self.delegate contentViewDataResponse:jsonDataDictionary[@"whichitEventObject"]];
     
 }
 
-
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    
+    NSURL *navigationURL = navigationAction.request.URL;
+    if([[UIApplication sharedApplication] canOpenURL:navigationURL]){
+        [[UIApplication sharedApplication] openURL:navigationURL
+                                           options:@{}
+                                 completionHandler:nil];
+    }
+    
+    return nil;
+}
 
 /*
 #pragma mark - Navigation

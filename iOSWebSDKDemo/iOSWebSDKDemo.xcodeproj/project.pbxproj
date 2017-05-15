@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A72ECBDD1EC7414C00C13D28 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72ECBDC1EC7414C00C13D28 /* WebViewController.m */; };
+		A72A94DD1EC9AB9600961434 /* Content_2.html in Resources */ = {isa = PBXBuildFile; fileRef = A72A94DC1EC9AB9600961434 /* Content_2.html */; };
+		A72A94DF1EC9AEFD00961434 /* Content_3.html in Resources */ = {isa = PBXBuildFile; fileRef = A72A94DE1EC9AEFD00961434 /* Content_3.html */; };
+		A72ECBDD1EC7414C00C13D28 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72ECBDC1EC7414C00C13D28 /* ContentViewController.m */; };
 		A7AD18C71EC5C0F500022A40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AD18C61EC5C0F500022A40 /* main.m */; };
 		A7AD18CA1EC5C0F500022A40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AD18C91EC5C0F500022A40 /* AppDelegate.m */; };
 		A7AD18CD1EC5C0F500022A40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AD18CC1EC5C0F500022A40 /* ViewController.m */; };
@@ -16,7 +18,7 @@
 		A7AD18D51EC5C0F500022A40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7AD18D31EC5C0F500022A40 /* LaunchScreen.storyboard */; };
 		A7AD18E01EC5C0F500022A40 /* iOSWebSDKDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AD18DF1EC5C0F500022A40 /* iOSWebSDKDemoTests.m */; };
 		A7AD18EB1EC5C0F500022A40 /* iOSWebSDKDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AD18EA1EC5C0F500022A40 /* iOSWebSDKDemoUITests.m */; };
-		A7AD18FF1EC5E21100022A40 /* wh_sdk.html in Resources */ = {isa = PBXBuildFile; fileRef = A7AD18FE1EC5E21100022A40 /* wh_sdk.html */; };
+		A7AD18FF1EC5E21100022A40 /* whichit_sdk_wrapper.html in Resources */ = {isa = PBXBuildFile; fileRef = A7AD18FE1EC5E21100022A40 /* whichit_sdk_wrapper.html */; };
 		A7AD19011EC61F2700022A40 /* Content_1.html in Resources */ = {isa = PBXBuildFile; fileRef = A7AD19001EC61F2700022A40 /* Content_1.html */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A72ECBDB1EC7414C00C13D28 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		A72ECBDC1EC7414C00C13D28 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		A72A94DC1EC9AB9600961434 /* Content_2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Content_2.html; sourceTree = "<group>"; };
+		A72A94DE1EC9AEFD00961434 /* Content_3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Content_3.html; sourceTree = "<group>"; };
+		A72ECBDB1EC7414C00C13D28 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		A72ECBDC1EC7414C00C13D28 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
 		A7AD18C21EC5C0F500022A40 /* iOSWebSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSWebSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AD18C61EC5C0F500022A40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7AD18C81EC5C0F500022A40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -56,7 +60,7 @@
 		A7AD18E61EC5C0F500022A40 /* iOSWebSDKDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSWebSDKDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AD18EA1EC5C0F500022A40 /* iOSWebSDKDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSWebSDKDemoUITests.m; sourceTree = "<group>"; };
 		A7AD18EC1EC5C0F500022A40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7AD18FE1EC5E21100022A40 /* wh_sdk.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = wh_sdk.html; sourceTree = "<group>"; };
+		A7AD18FE1EC5E21100022A40 /* whichit_sdk_wrapper.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = whichit_sdk_wrapper.html; sourceTree = "<group>"; };
 		A7AD19001EC61F2700022A40 /* Content_1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Content_1.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +112,7 @@
 		A7AD18C41EC5C0F500022A40 /* iOSWebSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
-				A7AD18FE1EC5E21100022A40 /* wh_sdk.html */,
+				A7AD18FE1EC5E21100022A40 /* whichit_sdk_wrapper.html */,
 				A7AD18C81EC5C0F500022A40 /* AppDelegate.h */,
 				A7AD18C91EC5C0F500022A40 /* AppDelegate.m */,
 				A7AD18CB1EC5C0F500022A40 /* ViewController.h */,
@@ -119,8 +123,10 @@
 				A7AD18D61EC5C0F500022A40 /* Info.plist */,
 				A7AD18C51EC5C0F500022A40 /* Supporting Files */,
 				A7AD19001EC61F2700022A40 /* Content_1.html */,
-				A72ECBDB1EC7414C00C13D28 /* WebViewController.h */,
-				A72ECBDC1EC7414C00C13D28 /* WebViewController.m */,
+				A72ECBDB1EC7414C00C13D28 /* ContentViewController.h */,
+				A72ECBDC1EC7414C00C13D28 /* ContentViewController.m */,
+				A72A94DC1EC9AB9600961434 /* Content_2.html */,
+				A72A94DE1EC9AEFD00961434 /* Content_3.html */,
 			);
 			path = iOSWebSDKDemo;
 			sourceTree = "<group>";
@@ -258,9 +264,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7AD18FF1EC5E21100022A40 /* wh_sdk.html in Resources */,
+				A7AD18FF1EC5E21100022A40 /* whichit_sdk_wrapper.html in Resources */,
+				A72A94DF1EC9AEFD00961434 /* Content_3.html in Resources */,
 				A7AD19011EC61F2700022A40 /* Content_1.html in Resources */,
 				A7AD18D51EC5C0F500022A40 /* LaunchScreen.storyboard in Resources */,
+				A72A94DD1EC9AB9600961434 /* Content_2.html in Resources */,
 				A7AD18D21EC5C0F500022A40 /* Assets.xcassets in Resources */,
 				A7AD18D01EC5C0F500022A40 /* Main.storyboard in Resources */,
 			);
@@ -290,7 +298,7 @@
 				A7AD18CD1EC5C0F500022A40 /* ViewController.m in Sources */,
 				A7AD18CA1EC5C0F500022A40 /* AppDelegate.m in Sources */,
 				A7AD18C71EC5C0F500022A40 /* main.m in Sources */,
-				A72ECBDD1EC7414C00C13D28 /* WebViewController.m in Sources */,
+				A72ECBDD1EC7414C00C13D28 /* ContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

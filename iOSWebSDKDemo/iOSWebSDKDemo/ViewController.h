@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
-#import "WebViewController.h"
+#import "ContentViewController.h"
 
-@interface ViewController : UIViewController {
-    WebViewController *contentViewController;
+@interface ViewController : UIViewController <ContentViewDelegate> {
+    ContentViewController *contentViewController;
 }
 
 @property (strong, nonatomic) WKWebView *webView;
