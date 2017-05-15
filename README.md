@@ -35,7 +35,7 @@ _Please note: The HTML file has to be located in the assets folder_.
 Handle events
 --------------------
 
-In order to finalize the initializzation of the HTML template and handle the
+In order to finalize the initialization of the HTML template and handle the
 relative events it a reference to an **JsObject** object is passed to the
 JavaScript environment, this is done by the function **addJavascriptInterface**.
 In order to initialize a **JsObject** it is necessary to pass a valid context
