@@ -67,3 +67,16 @@ relative JSON is parsed and all the data are displayed on a TextBox.
                     }
                 }, **BLOCKQUOTE FILE**), "javaObj");
     ...
+
+Trace unique users
+---------------------
+
+In order to be able to trace users across different app and sessions it is
+necessary to implement the function **getAndroidID** in the **JsObject***. Any
+unique user string ID is valid, in our example we use the AndroidID value.
+
+    public class JsObject {
+    ...
+        public String getAndroidID() { return Settings.Secure.getString(mContext.getContentResolver(),
+                Settings.Secure.ANDROID_ID);}
+    ...
