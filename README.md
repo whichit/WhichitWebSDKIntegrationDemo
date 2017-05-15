@@ -4,10 +4,15 @@ Web SDK Demo Definitions
 ------------------------
 
 Wrapper : The Whichit WebSDK Wrapper template. Found in the file: whichit_sdk_wrapper.html
+
 Content : Paste the blockquote found on the final page of creation in an HTML file with naming convention: "Content_1.html", "Content_2.html", etc.
+
 ContentViewController: This is the UIViewController example file that creates a `WKWebView`, loads the HTML from the `Content` and `Wrapper` files, and handles callbacks from Javascript actions.
+
 Whichit : A singular post.
+
 Collection: A collection of `Whichits` that could be a Survey or a Quiz.
+
 Engage Card: The final view of a `Whichit` or `Collection` which contains a `Call-To-Action (CTA)` button along with some information.
 
 Load Whichit Data
